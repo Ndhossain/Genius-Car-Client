@@ -1,13 +1,13 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
-import banner1 from '../../../assets/images/banner/1.jpg';
-import banner2 from '../../../assets/images/banner/2.jpg';
-import banner3 from '../../../assets/images/banner/3.jpg';
-import banner4 from '../../../assets/images/banner/4.jpg';
-import banner5 from '../../../assets/images/banner/5.jpg';
-import banner6 from '../../../assets/images/banner/6.jpg';
-import BannerItem from '../../common/BannerItem';
+import banner1 from '../../../../assets/images/banner/1.jpg';
+import banner2 from '../../../../assets/images/banner/2.jpg';
+import banner3 from '../../../../assets/images/banner/3.jpg';
+import banner4 from '../../../../assets/images/banner/4.jpg';
+import banner5 from '../../../../assets/images/banner/5.jpg';
+import banner6 from '../../../../assets/images/banner/6.jpg';
+import BannerItem from './BannerItem';
 import './BannerImageOverlay.css';
 
 function Banner() {
@@ -23,7 +23,7 @@ function Banner() {
         }
     };
     return (
-        <div className="relative rounded-xl overflow-hidden w-full sm:h-[600px] h-[400px] mt-5">
+        <div className="relative rounded-xl overflow-hidden w-full sm:h-[600px] h-[400px]">
             <div style={{ left: `${carrousel}%` }} className="w-full absolute flex duration-300">
                 <BannerItem image={banner1} />
                 <BannerItem image={banner2} />
