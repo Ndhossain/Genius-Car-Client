@@ -13,7 +13,7 @@ function ServiceContainer({ service }) {
             <div className="card-body gap-3">
                 <h2 className="card-title text-left">{title}</h2>
                 <div className="card-actions justify-between w-full">
-                    <p className="font-semibold text-primary text-left">Price: {price}</p>
+                    <p className="font-semibold text-primary text-left">Price: ${price}</p>
                     <Link to={`/checkout/${_id}`}>
                         <AiOutlineArrowRight color="#FF3811" size={24} fontWeight="bold" />
                     </Link>
