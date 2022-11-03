@@ -21,6 +21,7 @@
     "jest": true
   },
   "rules": {
+    "no-underscore-dangle": 0,
     "global-require": 0,
     "react/react-in-jsx-scope": 0,
     "react-hooks/rules-of-hooks": "error",

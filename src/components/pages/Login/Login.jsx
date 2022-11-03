@@ -9,7 +9,7 @@ import loginimg from '../../../assets/images/login/login.svg';
 import useAuth from '../../../hooks/useAuth';
 
 function Login() {
-    const { setLoading, providerLogin, login } = useAuth();
+    const { setLoading, loading, providerLogin, login } = useAuth();
     const [error, setError] = useState(null);
     const {
         register,
@@ -84,7 +84,7 @@ function Login() {
                         </div>
                         <p className="text-red-500">{error && error}</p>
                         <div className="form-control mt-6">
-                            <button type="submit" className="btn btn-primary">
+                            <button disabled={loading} type="submit" className="btn btn-primary">
                                 Login
                             </button>
                         </div>

@@ -9,17 +9,14 @@ import loginimg from '../../../assets/images/login/login.svg';
 import useAuth from '../../../hooks/useAuth';
 
 function Register() {
-    const { setLoading, providerLogin, register: registerUser, currentUser } = useAuth();
+    const { setLoading, providerLogin, register: registerUser, loading } = useAuth();
     const [error, setError] = useState(null);
     const {
         register,
         handleSubmit,
-        // watch,
         formState: { errors },
     } = useForm();
     const navigate = useNavigate();
-
-    console.log(currentUser);
 
     const onSubmit = async (data) => {
         setError(null);
@@ -45,7 +42,6 @@ function Register() {
         } catch (err) {
             setError(err.message);
             setLoading(false);
-            console.log(err);
         }
     };
 
@@ -112,7 +108,7 @@ function Register() {
                         </div>
                         <p className="text-red-500">{error && error}</p>
                         <div className="form-control mt-6">
-                            <button type="submit" className="btn btn-primary">
+                            <button disabled={loading} type="submit" className="btn btn-primary">
                                 Register
                             </button>
                         </div>
