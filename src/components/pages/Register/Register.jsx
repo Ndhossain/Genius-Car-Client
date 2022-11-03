@@ -4,7 +4,7 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginimg from '../../../assets/images/login/login.svg';
 import useAuth from '../../../hooks/useAuth';
 
@@ -17,13 +17,17 @@ function Register() {
         formState: { errors },
     } = useForm();
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const { from } = location.state || '';
+    console.log(from);
 
     const onSubmit = async (data) => {
         setError(null);
         if (data.password === data.confirm_password) {
             try {
                 await registerUser(data.email, data.password, data.name);
-                navigate('/');
+                navigate(from);
             } catch (err) {
                 setError(err.message);
                 setLoading(false);

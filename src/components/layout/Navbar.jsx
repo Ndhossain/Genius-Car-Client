@@ -1,10 +1,13 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import { FaUser, FaUserPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
+import useAuth from '../../hooks/useAuth';
 
 function Navbar() {
+    const { currentUser, logout, loading } = useAuth();
     return (
         <div data-theme="light">
             <div className="navbar bg-base-100 container mx-auto px-5">
@@ -36,9 +39,6 @@ function Navbar() {
                             <li>
                                 <Link to="/about">About</Link>
                             </li>
-                            <li>
-                                <Link to="/login">Log In</Link>
-                            </li>
                         </ul>
                     </div>
                     <Link to="/">
@@ -53,12 +53,40 @@ function Navbar() {
                         <li>
                             <Link to="/about">About</Link>
                         </li>
-                        <li>
-                            <Link to="/login">Log In</Link>
-                        </li>
                     </ul>
                 </div>
-                <div className="navbar-end">
+                <div className="navbar-end gap-3">
+                    {!loading &&
+                        (currentUser && currentUser.uid ? (
+                            <div className="dropdown dropdown-end">
+                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                    {currentUser.photoURL ? (
+                                        <div className="w-10 rounded-full">
+                                            <img
+                                                src={currentUser.photoURL}
+                                                alt={currentUser.displayName}
+                                            />
+                                        </div>
+                                    ) : (
+                                        <FaUser size={22} />
+                                    )}
+                                </label>
+                                <ul
+                                    tabIndex={0}
+                                    className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52 border"
+                                >
+                                    <li>
+                                        <button type="button" onClick={() => logout()}>
+                                            Logout
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        ) : (
+                            <Link to="/login" className="btn btn-ghost btn-circle avatar">
+                                <FaUserPlus size={22} />
+                            </Link>
+                        ))}
                     <Link to="/" className="btn btn-outline btn-primary">
                         Appointment
                     </Link>

@@ -60,7 +60,7 @@ function AuthProvider({ children }) {
         <AuthContext.Provider
             value={{ providerLogin, register, login, logout, currentUser, loading, setLoading }}
         >
-            {!loading && children}
+            {children}
         </AuthContext.Provider>
     );
 }

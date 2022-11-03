@@ -1,0 +1,20 @@
+import React from 'react';
+
+function DeleteConfirm({ handleDelete, deleteId }) {
+    console.log(deleteId);
+    return (
+        <div className="modal-box">
+            <h3 className="font-bold text-lg">Are You Sure you want to delete?</h3>
+            <div className="modal-action">
+                <label htmlFor="my-modal" className="btn">
+                    Cancel
+                </label>
+                <button type="button" className="btn btn-primary">
+                    Okay
+                </button>
+            </div>
+        </div>
+    );
+}
+
+export default DeleteConfirm;

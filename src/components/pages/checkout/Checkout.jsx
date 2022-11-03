@@ -2,14 +2,15 @@
 import axios from 'axios';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useLoaderData } from 'react-router-dom';
+import { toast } from 'react-hot-toast';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 
 function Checkout() {
     const service = useLoaderData();
     const { _id, price, title } = service;
     const { currentUser } = useAuth();
-    console.log(currentUser);
+    const navigate = useNavigate();
     const {
         register,
         handleSubmit,
@@ -29,6 +30,7 @@ function Checkout() {
             ...data,
             service: _id,
             serviceName: title,
+            uid: currentUser.uid,
         };
         console.log(order);
         axios({
@@ -37,7 +39,8 @@ function Checkout() {
             url: 'http://localhost:5000/orders',
         }).then((res) => {
             if (res?.data?.acknowledged) {
-                alert('data added successfully');
+                toast.success('data added successfully');
+                navigate('/orders');
             }
         });
     };
@@ -63,7 +66,9 @@ function Checkout() {
                             type="email"
                             placeholder="Type your email"
                             className="input input-bordered w-full"
-                            {...register('email', { required: 'Enter the information properly' })}
+                            {...register('email', {
+                                required: 'Enter the information properly',
+                            })}
                         />
                     </div>
                     <div>
@@ -72,7 +77,9 @@ function Checkout() {
                             type="text"
                             placeholder="Type your phone no."
                             className="input input-bordered w-full"
-                            {...register('phoneNo', { required: 'Enter the information properly' })}
+                            {...register('phoneNo', {
+                                required: 'Enter the information properly',
+                            })}
                         />
                     </div>
                     <div>
@@ -81,7 +88,9 @@ function Checkout() {
                             type="text"
                             placeholder="Type service"
                             className="input input-bordered w-full"
-                            {...register('service', { required: 'Enter the information properly' })}
+                            {...register('service', {
+                                required: 'Enter the information properly',
+                            })}
                         />
                     </div>
                 </div>

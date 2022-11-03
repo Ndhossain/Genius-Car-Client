@@ -21,6 +21,7 @@
     "jest": true
   },
   "rules": {
+    "jsx-a11y/label-has-associated-control": 0,
     "no-underscore-dangle": 0,
     "global-require": 0,
     "react/react-in-jsx-scope": 0,

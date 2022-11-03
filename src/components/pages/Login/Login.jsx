@@ -4,13 +4,14 @@
 import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginimg from '../../../assets/images/login/login.svg';
 import useAuth from '../../../hooks/useAuth';
 
 function Login() {
     const { setLoading, loading, providerLogin, login } = useAuth();
     const [error, setError] = useState(null);
+    const location = useLocation();
     const {
         register,
         handleSubmit,
@@ -19,11 +20,13 @@ function Login() {
     } = useForm();
     const navigate = useNavigate();
 
+    const from = location.state?.from?.pathname || '';
+
     const onSubmit = async (data) => {
         setError(null);
         try {
             await login(data.email, data.password);
-            navigate('/');
+            navigate(from, { replace: true });
         } catch (err) {
             setError(err.message);
             setLoading(false);
@@ -90,7 +93,7 @@ function Login() {
                         </div>
                         <p className="text-sm">
                             Don&apos;t have a account,{' '}
-                            <Link className="link link-hover" to="/register">
+                            <Link className="link link-hover" to="/register" state={{ from }}>
                                 Register now
                             </Link>
                             .
