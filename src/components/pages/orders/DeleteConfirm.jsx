@@ -1,7 +1,7 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 import React from 'react';
 
 function DeleteConfirm({ handleDelete, deleteId }) {
-    console.log(deleteId);
     return (
         <div className="modal-box">
             <h3 className="font-bold text-lg">Are You Sure you want to delete?</h3>
@@ -9,9 +9,13 @@ function DeleteConfirm({ handleDelete, deleteId }) {
                 <label htmlFor="my-modal" className="btn">
                     Cancel
                 </label>
-                <button type="button" className="btn btn-primary">
+                <label
+                    onClick={() => handleDelete(deleteId)}
+                    htmlFor="my-modal"
+                    className="btn btn-primary"
+                >
                     Okay
-                </button>
+                </label>
             </div>
         </div>
     );

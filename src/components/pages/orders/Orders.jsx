@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import useAuth from '../../../hooks/useAuth';
 import DeleteConfirm from './DeleteConfirm';
 import OrderContainer from './OrderContainer';
@@ -18,7 +19,22 @@ function Orders() {
         });
     }, [currentUser.uid]);
 
-    const handleDelete = () => {};
+    const handleDelete = (id) => {
+        axios({
+            method: 'DELETE',
+            url: `http://localhost:5000/orders/${id}`,
+        })
+            .then((res) => {
+                if (res.data.deletedCount === 1) {
+                    toast.success('Items Deleted');
+                    const restOrders = orders.filter((order) => order._id !== id);
+                    setOrders(restOrders);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
     return (
         <div>

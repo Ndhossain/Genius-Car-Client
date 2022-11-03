@@ -3,10 +3,10 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ImCross } from 'react-icons/im';
 
-function OrderContainer({ order, _id }) {
+function OrderContainer({ order, setDeleteId }) {
     const [serviceDetails, setServiceDetails] = useState({});
-    const { service } = order;
-    const { img, price, title, setDeleteId } = serviceDetails;
+    const { service, _id } = order;
+    const { img, price, title } = serviceDetails;
 
     useEffect(() => {
         axios({
