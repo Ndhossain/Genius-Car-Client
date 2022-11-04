@@ -3,9 +3,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { ImCross } from 'react-icons/im';
 
-function OrderContainer({ order, setDeleteId }) {
+function OrderContainer({ order, setDeleteId, handleApproved }) {
     const [serviceDetails, setServiceDetails] = useState({});
-    const { service, _id } = order;
+    const { service, _id, isApprove } = order;
     const { img, price, title } = serviceDetails;
 
     useEffect(() => {
@@ -45,8 +45,12 @@ function OrderContainer({ order, setDeleteId }) {
             <td>${price}</td>
             {/* <td>Red</td> */}
             <th>
-                <button type="button" className="btn btn-ghost btn-xs">
-                    details
+                <button
+                    onClick={() => handleApproved(_id)}
+                    type="button"
+                    className={`btn ${isApprove ? 'btn-success' : 'btn-primary'} btn-outline`}
+                >
+                    {isApprove ? 'Approved' : 'Pending'}
                 </button>
             </th>
         </tr>

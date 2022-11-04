@@ -36,6 +36,25 @@ function Orders() {
             });
     };
 
+    const handleApproved = (id) => {
+        const restOrders = orders.filter((order) => order._id !== id);
+        const currentOrder = orders.find((order) => order._id === id);
+        if (!currentOrder.isApprove) {
+            axios({
+                method: 'PATCH',
+                url: `http://localhost:5000/orders/${id}`,
+                data: { isApprove: 'Approved' },
+            }).then((res) => {
+                if (res.data?.matchedCount > 0) {
+                    currentOrder.isApprove = 'Approved';
+                    setOrders([currentOrder, ...restOrders]);
+                }
+            });
+        } else {
+            toast.error('Already approved');
+        }
+    };
+
     return (
         <div>
             <div className="overflow-x-auto w-full">
@@ -55,6 +74,7 @@ function Orders() {
                                 key={order._id}
                                 order={order}
                                 setDeleteId={setDeleteId}
+                                handleApproved={handleApproved}
                             />
                         ))}
                     </tbody>
