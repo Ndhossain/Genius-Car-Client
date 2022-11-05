@@ -5,7 +5,7 @@ import about1 from '../../../../assets/images/about_us/person.jpg';
 function AboutHome() {
     return (
         <div className="hero my-20">
-            <div className="hero-content flex-col lg:flex-row">
+            <div className="hero-content flex-col lg:flex-row gap-10 lg:gap-5">
                 <div className="relative lg:w-1/2">
                     <img src={about1} alt="About" className="w-3/4 rounded-lg shadow-2xl " />
                     <img
@@ -15,7 +15,10 @@ function AboutHome() {
                     />
                 </div>
                 <div className="lg:w-1/2 mt-5 lg:mt-0">
-                    <h1 className="text-5xl font-bold">About us</h1>
+                    <h4 className="text-primary font-semibold">About</h4>
+                    <h1 className="text-4xl font-semibold my-3">
+                        We are qualified & of experience in this field
+                    </h1>
                     <p className="py-6">
                         Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi
                         exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.

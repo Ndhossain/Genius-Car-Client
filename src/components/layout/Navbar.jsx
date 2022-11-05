@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import { BsFillBagFill } from 'react-icons/bs';
 import { FaUser, FaUserPlus } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo.svg';
@@ -48,40 +49,49 @@ function Navbar() {
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal p-0 gap-2">
                         <li>
-                            <Link to="/">Home</Link>
+                            <Link className="font-medium" to="/">
+                                Home
+                            </Link>
                         </li>
                         <li>
-                            <Link to="/about">About</Link>
+                            <Link className="font-medium" to="/about">
+                                About
+                            </Link>
                         </li>
                     </ul>
                 </div>
                 <div className="navbar-end gap-3">
                     {!loading &&
                         (currentUser && currentUser.uid ? (
-                            <div className="dropdown dropdown-end">
-                                <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                                    {currentUser.photoURL ? (
-                                        <div className="w-10 rounded-full">
-                                            <img
-                                                src={currentUser.photoURL}
-                                                alt={currentUser.displayName}
-                                            />
-                                        </div>
-                                    ) : (
-                                        <FaUser size={22} />
-                                    )}
-                                </label>
-                                <ul
-                                    tabIndex={0}
-                                    className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52 border"
-                                >
-                                    <li>
-                                        <button type="button" onClick={() => logout()}>
-                                            Logout
-                                        </button>
-                                    </li>
-                                </ul>
-                            </div>
+                            <>
+                                <Link to="/orders" className="btn btn-ghost btn-circle">
+                                    <BsFillBagFill size={22} />
+                                </Link>
+                                <div className="dropdown dropdown-end">
+                                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                                        {currentUser.photoURL ? (
+                                            <div className="w-10 rounded-full">
+                                                <img
+                                                    src={currentUser.photoURL}
+                                                    alt={currentUser.displayName}
+                                                />
+                                            </div>
+                                        ) : (
+                                            <FaUser size={22} />
+                                        )}
+                                    </label>
+                                    <ul
+                                        tabIndex={0}
+                                        className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52 border"
+                                    >
+                                        <li>
+                                            <button type="button" onClick={() => logout()}>
+                                                Logout
+                                            </button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </>
                         ) : (
                             <Link to="/login" className="btn btn-ghost btn-circle avatar">
                                 <FaUserPlus size={22} />

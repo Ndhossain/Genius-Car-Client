@@ -1,49 +1,38 @@
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginimg from '../../../assets/images/login/login.svg';
 import useAuth from '../../../hooks/useAuth';
+import SocialLogin from '../../common/SocialLogin';
 
 function Login() {
-    const { setLoading, loading, providerLogin, login } = useAuth();
+    const { setLoading, loading, login } = useAuth();
     const [error, setError] = useState(null);
     const location = useLocation();
     const {
         register,
         handleSubmit,
-        // watch,
+        reset,
         formState: { errors },
     } = useForm();
     const navigate = useNavigate();
 
     const from = location.state?.from?.pathname || '';
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (data, e) => {
+        e.preventDefault();
         setError(null);
         try {
             await login(data.email, data.password);
             navigate(from, { replace: true });
+            toast.success('Successfully Logged In');
+            reset();
         } catch (err) {
             setError(err.message);
             setLoading(false);
-        }
-    };
-
-    const googleProvider = new GoogleAuthProvider();
-
-    const googleLogin = async () => {
-        setError(null);
-        try {
-            await providerLogin(googleProvider);
-            navigate('/');
-        } catch (err) {
-            setError(err.message);
-            setLoading(false);
-            console.log(err);
+            toast.error('Something went wrong');
         }
     };
 
@@ -80,9 +69,9 @@ function Login() {
                                 {...register('password', { required: 'Fill the blank Inputs' })}
                             />
                             <label className="label">
-                                <a href="#" className="label-text-alt link link-hover">
+                                <button type="button" className="label-text-alt link link-hover">
                                     Forgot password?
-                                </a>
+                                </button>
                             </label>
                         </div>
                         <p className="text-red-500">{error && error}</p>
@@ -93,14 +82,17 @@ function Login() {
                         </div>
                         <p className="text-sm">
                             Don&apos;t have a account,{' '}
-                            <Link className="link link-hover" to="/register" state={{ from }}>
+                            <Link
+                                className="link link-hover text-primary font-medium"
+                                to="/register"
+                                state={{ from }}
+                            >
                                 Register now
                             </Link>
                             .
                         </p>
-                        <button type="button" onClick={googleLogin}>
-                            Google
-                        </button>
+                        <div className="divider">OR</div>
+                        <SocialLogin from={from} setError={setError} />
                     </form>
                 </div>
             </div>

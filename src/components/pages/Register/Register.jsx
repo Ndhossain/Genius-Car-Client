@@ -1,51 +1,45 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import loginimg from '../../../assets/images/login/login.svg';
 import useAuth from '../../../hooks/useAuth';
+import SocialLogin from '../../common/SocialLogin';
 
 function Register() {
-    const { setLoading, providerLogin, register: registerUser, loading } = useAuth();
+    const { setLoading, register: registerUser, loading } = useAuth();
     const [error, setError] = useState(null);
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors },
     } = useForm();
     const navigate = useNavigate();
     const location = useLocation();
 
-    const { from } = location.state || '';
+    const from = location.state?.from || '/';
     console.log(from);
 
-    const onSubmit = async (data) => {
+    const onSubmit = async (data, e) => {
+        e.preventDefault();
         setError(null);
         if (data.password === data.confirm_password) {
             try {
                 await registerUser(data.email, data.password, data.name);
                 navigate(from);
+                toast.success('Successfully Registered');
+                reset();
             } catch (err) {
                 setError(err.message);
                 setLoading(false);
+                toast.error('Something went wrong');
             }
         } else {
             setError("Password isn't matching.");
-        }
-    };
-
-    const googleProvider = new GoogleAuthProvider();
-
-    const googleLogin = async () => {
-        try {
-            await providerLogin(googleProvider);
-            navigate('/');
-        } catch (err) {
-            setError(err.message);
-            setLoading(false);
         }
     };
 
@@ -118,14 +112,13 @@ function Register() {
                         </div>
                         <p className="text-sm">
                             Already have a account,{' '}
-                            <Link className="link link-hover" to="/login">
+                            <Link className="link link-hover text-primary font-medium" to="/login">
                                 Login now
                             </Link>
                             .
                         </p>
-                        <button type="button" onClick={googleLogin}>
-                            Google
-                        </button>
+                        <div className="divider">OR</div>
+                        <SocialLogin from={from} setError={setError} />
                     </form>
                 </div>
             </div>
