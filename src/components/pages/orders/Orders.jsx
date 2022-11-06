@@ -8,15 +8,25 @@ import OrderContainer from './OrderContainer';
 function Orders() {
     const [orders, setOrders] = useState([]);
     const [deleteId, setDeleteId] = useState('');
-    const { currentUser } = useAuth();
+    const { currentUser, logout } = useAuth();
 
     useEffect(() => {
         axios({
             method: 'GET',
             url: `http://localhost:5000/orders?uid=${currentUser.uid}`,
-        }).then((res) => {
-            setOrders(res.data);
-        });
+            headers: {
+                authorization: `bearer ${localStorage.getItem('gen-token')}`,
+            },
+        })
+            .then((res) => {
+                setOrders(res.data);
+            })
+            .catch((err) => {
+                if (err.response.status === 401 || err.response.status === 403) {
+                    logout();
+                }
+            });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [currentUser.uid]);
 
     const handleDelete = (id) => {

@@ -25,11 +25,22 @@ function Login() {
         e.preventDefault();
         setError(null);
         try {
-            await login(data.email, data.password);
+            const userData = await login(data.email, data.password);
+            const res = await fetch('http://localhost:5000/jwt', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                },
+                body: JSON.stringify({ uid: userData?.user?.uid }),
+            });
+            const jwtData = await res.json();
+            console.log(jwtData);
+            localStorage.setItem('gen-token', jwtData.token);
             navigate(from, { replace: true });
             toast.success('Successfully Logged In');
             reset();
         } catch (err) {
+            console.error(err);
             setError(err.message);
             setLoading(false);
             toast.error('Something went wrong');
