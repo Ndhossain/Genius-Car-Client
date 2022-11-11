@@ -7,7 +7,7 @@ function HomeService() {
     useEffect(() => {
         axios({
             method: 'GET',
-            url: 'http://localhost:5000/services',
+            url: 'https://genius-car-server-ndhossain.vercel.app/services',
         }).then((res) => {
             setServices(res.data);
         });

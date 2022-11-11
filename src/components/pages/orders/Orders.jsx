@@ -13,7 +13,7 @@ function Orders() {
     useEffect(() => {
         axios({
             method: 'GET',
-            url: `http://localhost:5000/orders?uid=${currentUser.uid}`,
+            url: `https://genius-car-server-ndhossain.vercel.app/orders?uid=${currentUser.uid}`,
             headers: {
                 authorization: `bearer ${localStorage.getItem('gen-token')}`,
             },
@@ -32,7 +32,7 @@ function Orders() {
     const handleDelete = (id) => {
         axios({
             method: 'DELETE',
-            url: `http://localhost:5000/orders/${id}`,
+            url: `https://genius-car-server-ndhossain.vercel.app/orders/${id}`,
         })
             .then((res) => {
                 if (res.data.deletedCount === 1) {
@@ -52,7 +52,7 @@ function Orders() {
         if (!currentOrder.isApprove) {
             axios({
                 method: 'PATCH',
-                url: `http://localhost:5000/orders/${id}`,
+                url: `https://genius-car-server-ndhossain.vercel.app/orders/${id}`,
                 data: { isApprove: 'Approved' },
             }).then((res) => {
                 if (res.data?.matchedCount > 0) {

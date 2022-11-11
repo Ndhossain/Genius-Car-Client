@@ -11,7 +11,7 @@ function OrderContainer({ order, setDeleteId, handleApproved }) {
     useEffect(() => {
         axios({
             method: 'GET',
-            url: `http://localhost:5000/services/${service}`,
+            url: `https://genius-car-server-ndhossain.vercel.app/services/${service}`,
         }).then((res) => {
             if (res.status === 200) {
                 setServiceDetails(res.data);

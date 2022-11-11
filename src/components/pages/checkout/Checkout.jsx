@@ -36,7 +36,7 @@ function Checkout() {
         axios({
             method: 'POST',
             data: order,
-            url: 'http://localhost:5000/orders',
+            url: 'https://genius-car-server-ndhossain.vercel.app/orders',
         }).then((res) => {
             if (res?.data?.acknowledged) {
                 toast.success('data added successfully');

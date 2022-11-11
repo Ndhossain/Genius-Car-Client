@@ -1,0 +1,17 @@
+[debug] [2022-11-11T15:58:26.321Z] ----------------------------------------------------------------------
+[debug] [2022-11-11T15:58:26.324Z] Command:       /usr/bin/node /usr/local/bin/firebase deploy
+[debug] [2022-11-11T15:58:26.324Z] CLI Version:   11.15.0
+[debug] [2022-11-11T15:58:26.324Z] Platform:      linux
+[debug] [2022-11-11T15:58:26.325Z] Node Version:  v16.18.1
+[debug] [2022-11-11T15:58:26.427Z] Time:          Fri Nov 11 2022 21:58:26 GMT+0600 (Bangladesh Standard Time)
+[debug] [2022-11-11T15:58:26.427Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-11T15:58:26.599Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-11T15:58:26.599Z] > authorizing via signed-in user (hhhssnahiid@gmail.com)
+[debug] [2022-11-11T15:58:26.600Z] [iam] checking project genius-car-d147a for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-11-11T15:58:26.625Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/genius-car-d147a:testIamPermissions [none]
+[debug] [2022-11-11T15:58:26.625Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/genius-car-d147a:testIamPermissions x-goog-quota-user=projects/genius-car-d147a
+[debug] [2022-11-11T15:58:26.626Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/genius-car-d147a:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-11-11T15:58:28.633Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/genius-car-d147a:testIamPermissions 200
+[debug] [2022-11-11T15:58:28.634Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/genius-car-d147a:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-11-11T15:58:28.637Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/genius-car-d147a [none]
